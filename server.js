@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var app = require('./app.js');
+var app = require("./onschedule/app.js");
 var debug = require('debug')('onschedule:server');
 var http = require('http');
 
