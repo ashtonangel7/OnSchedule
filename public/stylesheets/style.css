@@ -1,5 +1,6 @@
-button {
+.menubutton {
     font-size:4em !important;
+    height:130px !important;
 }
 
 h1 {
