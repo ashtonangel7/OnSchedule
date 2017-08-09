@@ -3,6 +3,11 @@
     height:130px !important;
 }
 
+.menupanel {
+    padding-top: 50px !important;
+    padding-bottom:50px !important;
+}
+
 h1 {
     font-size:6em !important;
 }
