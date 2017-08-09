@@ -1,5 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	.container
+		.row
+			div(class='col-md-12 col-sm-12 col-xs-12 col-lg-12' align='center')
+				.panel.panel-info
+					div(class='panel-heading')
+						h3(class='panel-title') #{title}
+					div(class='panel-body')
+							button(type='button' class='btn btn-default btn-block') Record Lesson
+							button(type='button' class='btn btn-default btn-block') Student Record
+							button(type='button' class='btn btn-default btn-block') Contract Setup
+					.panel-footer
