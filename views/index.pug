@@ -1,7 +1,6 @@
 extends layout
 
 block content
-	script(src='/javascripts/indexFunctions.js')
 	.container
 		.row
 			div(class='col-md-12 col-sm-12 col-xs-12 col-lg-12' align='center')
@@ -13,3 +12,5 @@ block content
 							button(type='button', class='menubutton btn btn-default btn-lg btn-block') Student Record
 							button(type='button', class='menubutton btn btn-default btn-lg btn-block') Contract Setup
 					.panel-footer
+block pagescripts
+	script(src='/javascripts/indexFunctions.js')
