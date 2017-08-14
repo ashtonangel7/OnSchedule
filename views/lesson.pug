@@ -20,17 +20,23 @@ block content
 											each value in students
 												option=value
 							.row
-								.col-12
+								.col-md-4.col-sm-12.col-xs-12.col-lg-4
 									.input-group.input-group-lg
-										span(class='input-group-addon',id='dateAddon') Date
-										input(id='date', class='form-control', aria-describedby='dateAddon')
+										span(class='input-group-addon',id='dayAddon') Day
+										select(id='day', class='form-control', aria-describedby='dayAddon')
+								.col-md-4.col-sm-12.col-xs-12.col-lg-4
+									.input-group.input-group-lg
+										span(class='input-group-addon',id='monthAddon') Month
+										select(id='month', class='form-control', aria-describedby='monthAddon')
+								.col-md-4.col-sm-12.col-xs-12.col-lg-4
+									.input-group.input-group-lg
+										span(class='input-group-addon',id='monthAddon') Year
+										select(id='year', class='form-control', aria-describedby='yearAddon')
 							.row
 								.col-12
 									.input-group.input-group-lg
 										span(class='input-group-addon',id='timeAddon') Start Time
 										select(id='time', class='form-control', aria-describedby='timeAddon')
-											each value in startTimes
-												option=value
 							.row
 								.col-12
 									.input-group.input-group-lg
@@ -46,5 +52,5 @@ block content
 									button(type='submit', class='lessonsubmitbutton btn btn-default btn-lg btn-block') Enter
 						.panel-footer
 block pagescripts
-	script(src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js')
+	script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js')
 	script(src='/javascripts/lessonFunctions.js')
