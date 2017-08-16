@@ -1,6 +1,9 @@
 let express = require('express');
 let router = express.Router();
 
+let onScheduleApi = require('../modules/onScheduleApi.js');
+
+
 let lessonData = {
     title: "Lesson",
     students: [{
@@ -24,7 +27,7 @@ let lessonData = {
 
 router.get('/', function (req, res, next) {
 
-    console.log(router);
+    onScheduleApi.Test();
 
     res.render('lesson', lessonData);
 });
