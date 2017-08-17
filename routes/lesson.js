@@ -3,33 +3,13 @@ let router = express.Router();
 
 let onScheduleApi = require('../modules/onScheduleApi.js');
 
-
-let lessonData = {
-    title: "Lesson",
-    students: [{
-        name: "Ashton",
-        value: 0
-    }, {
-        name: "Mike",
-        value: 1
-    }],
-    instructors: [{
-        name: "Sonia",
-        value: 0
-    }, {
-        name: "Lizette",
-        value: 1
-    }, {
-        name: "David",
-        value: 2
-    }]
-};
-
 router.get('/', function (req, res, next) {
 
-    onScheduleApi.Test();
-
-    res.render('lesson', lessonData);
+    onScheduleApi.Test().then(function (successResult) {
+        res.render('lesson', successResult);
+    }, function (failResult) {
+        console.log(failResult);
+    });    
 });
 
 router.post('/', function (req, res) {

@@ -13,36 +13,34 @@ let sqlConfig = {
 
 mssql.on('error', err => {
     console.log(err);
+    mssql.close();
 });
 
+
 module.exports.Test = function Test() {
+    return new Promise((resolve, reject) => {
 
-    
-    mssql.connect(sqlConfig, err => {
-        // ... error checks 
+        let connectionPool = undefined;
+        let result = {
+            customers: undefined,
+            staff:undefined
+        }
 
-        console.log(err);
-
-        const request = new mssql.Request();
-        request.stream = true;
-        request.query('select 1');
-
-        request.on('recordset', columns => {
-            //console.log(columns);
-        });
-
-        request.on('row', row => {
-            console.log(row);
-        });
-
-        request.on('error', err => { 
-            console.log(err);
-        });
-
-        request.on('done', result => {
-            //console.log(result);
-
+        mssql.connect(sqlConfig).then(pool => {
+            connectionPool = pool;
+            return connectionPool.request().execute('dbo.GetCustomers');
+        }).then((customerResult) => {
+            result.customers = customerResult.recordset;
+            return connectionPool.request().execute('dbo.GetStaff');
+        }).then((staffResult) => {
+            result.staff = staffResult.recordset;
+            resolve(result);
+            connectionPool.close();
             mssql.close();
+        }).catch(err => {
+            connectionPool.close();
+            mssql.close();
+            reject(err);
         });
     });
 }
