@@ -4,13 +4,13 @@ block pagestyles
 	link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css')
 
 block content
-	.container
-		form(method='Post')
+	.container-fluid
+		form(class='lessonForm', method='Post')
 			.row
 				.col-md-12.col-sm-12.col-xs-12.col-lg-12
 					.panel.panel-info
 						div(class='menupanel panel-heading')
-							h1(class='panel-title') #{title}
+							h1(class='panel-title') Lessons
 						div(class='panel-body')
 							.row
 								.col-12
@@ -22,15 +22,17 @@ block content
 											else
 												option Empty
 							.row
-								.col-md-4.col-sm-12.col-xs-12.col-lg-4
+								.col-12
 									.input-group.input-group-lg
 										span(class='input-group-addon',id='dayAddon') Day
 										select(id='day',name='day', class='form-control', aria-describedby='dayAddon')
-								.col-md-4.col-sm-12.col-xs-12.col-lg-4
+							.row
+								.col-12
 									.input-group.input-group-lg
 										span(class='input-group-addon',id='monthAddon') Month
 										select(id='month',name='month', class='form-control', aria-describedby='monthAddon')
-								.col-md-4.col-sm-12.col-xs-12.col-lg-4
+							.row
+								.col-12
 									.input-group.input-group-lg
 										span(class='input-group-addon',id='monthAddon') Year
 										select(id='year',name='year', class='form-control', aria-describedby='yearAddon')
