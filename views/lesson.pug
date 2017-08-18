@@ -5,12 +5,12 @@ block pagestyles
 
 block content
 	.container-fluid
-		form(class='lessonForm', method='Post')
+		form(class='entryForm', method='Post')
 			.row
 				.col-md-12.col-sm-12.col-xs-12.col-lg-12
 					.panel.panel-info
 						div(class='menupanel panel-heading', align='center')
-							h1(class='panel-title') Lessons
+							h1(class='panel-title') Lesson
 						div(class='panel-body')
 							.row
 								.col-12
@@ -45,7 +45,7 @@ block content
 								.col-12
 									.input-group.input-group-lg
 										span(class='input-group-addon',id='durationAddon') Lesson Length
-										select(id='duration', class='form-control', aria-describedby='durationAddon')
+										select(id='duration', name='duration', class='form-control', aria-describedby='durationAddon')
 							.row
 								.col-12
 									.input-group.input-group-lg
@@ -57,7 +57,7 @@ block content
 												option Empty
 							.row
 								.col-12
-									button(type='submit', class='lessonsubmitbutton btn btn-default btn-lg btn-block') Enter
+									button(type='submit', class='submitButton btn btn-default btn-lg btn-block') Enter
 						.panel-footer
 block pagescripts
 	script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js')

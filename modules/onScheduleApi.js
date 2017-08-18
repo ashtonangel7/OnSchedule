@@ -17,24 +17,62 @@ mssql.on('error', err => {
 });
 
 
-module.exports.Test = function Test() {
+module.exports.GetCustomers = function GetCustomers() {
     return new Promise((resolve, reject) => {
 
         let connectionPool = undefined;
-        let result = {
-            customers: undefined,
-            staff:undefined
-        }
 
         mssql.connect(sqlConfig).then(pool => {
             connectionPool = pool;
             return connectionPool.request().execute('dbo.GetCustomers');
-        }).then((customerResult) => {
-            result.customers = customerResult.recordset;
+        }).then((customerResult) => {   
+            resolve(customerResult.recordset);
+            connectionPool.close();
+            mssql.close();
+        }).catch(err => {
+            connectionPool.close();
+            mssql.close();
+            reject(err);
+        });
+    });
+}
+
+module.exports.GetStaff = function GetStaff() {
+    return new Promise((resolve, reject) => {
+
+        let connectionPool = undefined;
+
+        mssql.connect(sqlConfig).then(pool => {
+            connectionPool = pool;
             return connectionPool.request().execute('dbo.GetStaff');
         }).then((staffResult) => {
-            result.staff = staffResult.recordset;
-            resolve(result);
+            resolve(staffResult.recordset);
+            connectionPool.close();
+            mssql.close();
+        }).catch(err => {
+            connectionPool.close();
+            mssql.close();
+            reject(err);
+        });
+    });
+}
+
+module.exports.WriteStudent = function WriteStudent(firstName, lastName, identityNumber, mobile, email) {
+    return new Promise((resolve, reject) => {
+
+        let connectionPool = undefined;
+
+        mssql.connect(sqlConfig).then(pool => {
+            connectionPool = pool;
+            return connectionPool.request()
+                .input('FirstName', mssql.Text, firstName)
+                .input('LastName', mssql.Text, lastName)
+                .input('IdentityNumber', mssql.Text, identityNumber)
+                .input('Mobile', mssql.Text, mobile)
+                .input('Email', mssql.Text, email)
+                .execute('dbo.WriteCustomer');
+        }).then((studentResult) => {
+            resolve(studentResult);
             connectionPool.close();
             mssql.close();
         }).catch(err => {

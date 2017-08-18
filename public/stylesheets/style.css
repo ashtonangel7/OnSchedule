@@ -34,7 +34,7 @@ body {
     
 }
 
-.lessonsubmitbutton {
+.submitButton {
     font-size:4em !important;
     height:160px !important;
 }
@@ -52,11 +52,11 @@ body {
     padding-left:0px !important;
 }
 
-.lessonForm span {
+.entryForm span {
     font-size:4em !important;
 }
 
-.lessonForm select {
+.entryForm select, input {
     height:180px !important;
     font-size:50px !important;
 }
