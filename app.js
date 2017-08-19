@@ -12,6 +12,7 @@ let lesson = require("./routes/lesson.js");
 let student = require("./routes/student.js");
 let instructor = require("./routes/instructor.js");
 let contract = require("./routes/contract.js");
+let login = require("./routes/login.js");
 
 let expressApplication = express();
 
@@ -34,6 +35,7 @@ expressApplication.use("/lessons", lesson);
 expressApplication.use("/students", student);
 expressApplication.use("/instructors", instructor);
 expressApplication.use("/contracts", contract);
+expressApplication.use("/login", login);
 
 // catch 404 and forward to error handler
 expressApplication.use(function (req, res, next) {
