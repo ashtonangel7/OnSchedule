@@ -1,0 +1,49 @@
+extends ../layout
+
+block pagestyles
+
+block content
+	.container-fluid
+		form(class='entryForm', method='Post', action='confirmlesson')
+			.row
+				.col-md-12.col-sm-12.col-xs-12.col-lg-12
+					.panel.panel-info
+						div(class='menupanel panel-heading')
+							span(class='backspan')
+								a(href='../')
+									span(class='glyphicon glyphicon-chevron-left', aria-hidden='true')
+							div(align='center')
+								h1(class='panel-title') Confirm Lesson
+						div(class='panel-body')
+							.row
+								.col-12
+									.input-group.input-group-lg
+										span(class='input-group-addon',id='studentNameAddon') Student
+										input(id='studentName',name='studentName', class='form-control', aria-describedby='studentNameAddon', value=studentName)
+							.row
+								.col-12
+									.input-group.input-group-lg
+										span(class='input-group-addon',id='contractAddon') Contract
+										select(id='contract',name='contract', class='form-control', aria-describedby='contractAddon')
+											each contract in contracts
+												option(value=contract.id) #{contract.name}
+											else
+												option Empty
+
+							.row
+								.col-12
+									input(id='student',name='student', class='form-control', value=student, type='hidden')
+							.row
+								.col-12
+									input(id='startDate',name='startDate', class='form-control', value=startDate, type='hidden')
+							.row
+								.col-12
+									input(id='endDate',name='endDate', class='form-control', value=endDate, type='hidden')
+							.row
+								.col-12
+									input(id='instructor',name='instructor', class='form-control', value=instructor, type='hidden')
+							.row
+								.col-12
+									button(type='submit', class='submitButton btn btn-default btn-lg btn-block') Accept
+						.panel-footer
+block pagescripts

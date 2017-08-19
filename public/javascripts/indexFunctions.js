@@ -1,5 +1,5 @@
 function openLessons() {
-    window.location = '/lesson';
+    window.location = '/lessons';
 }
 
 function openStudents() {
@@ -11,5 +11,5 @@ function openInstructors() {
 }
 
 function openContracts() {
-    window.location = '/contract';
+    window.location = '/contracts';
 }

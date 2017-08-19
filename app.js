@@ -11,6 +11,7 @@ let api = require("./routes/api.js");
 let lesson = require("./routes/lesson.js");
 let student = require("./routes/student.js");
 let instructor = require("./routes/instructor.js");
+let contract = require("./routes/contract.js");
 
 let expressApplication = express();
 
@@ -29,9 +30,10 @@ expressApplication.use(express.static(path.join(__dirname, 'public')));
 expressApplication.use('/', index);
 expressApplication.use('/users', users);
 expressApplication.use("/api", api);
-expressApplication.use("/lesson", lesson);
+expressApplication.use("/lessons", lesson);
 expressApplication.use("/students", student);
 expressApplication.use("/instructors", instructor);
+expressApplication.use("/contracts", contract);
 
 // catch 404 and forward to error handler
 expressApplication.use(function (req, res, next) {

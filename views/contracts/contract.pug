@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+	.container-fluid
+		.row
+			div(class='col-md-12 col-sm-12 col-xs-12 col-lg-12')
+				.panel.panel-info
+					div(class='menupanel panel-heading')
+						span(class='backspan')
+							a(href='../')
+								span(class='glyphicon glyphicon-chevron-left', aria-hidden='true')
+						div(align='center')
+							h1(class='panel-title') Contracts
+					div(class='panel-body')
+							button(type='button', class='menubutton btn btn-default btn-lg btn-block', onClick='addContract()') Add Contract
+					.panel-footer
+block pagescripts
+	script(src='/javascripts/contractFunctions.js')

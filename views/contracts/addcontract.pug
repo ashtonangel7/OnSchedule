@@ -1,0 +1,79 @@
+extends ../layout
+
+block pagestyles
+
+
+block content
+	.container-fluid
+		form(class='entryForm', method='Post')
+			.row
+				.col-md-12.col-sm-12.col-xs-12.col-lg-12
+					.panel.panel-info
+						div(class='menupanel panel-heading')
+							span(class='backspan')
+								a(href='./')
+									span(class='glyphicon glyphicon-chevron-left', aria-hidden='true')
+							div(align='center')
+								h1(class='panel-title') Add Contract
+						div(class='panel-body')
+							.row
+								.col-12
+									.input-group.input-group-lg
+										span(class='input-group-addon',id='studentAddon') Student
+										select(id='student',name='student', class='form-control', aria-describedby='studentAddon')
+											each student in customers
+												option(value=student.id) #{student.first_name}
+											else
+												option Empty
+							.row
+								.col-12
+									.input-group.input-group-lg
+										span(class='input-group-addon',id='dayAddon') Start Day
+										select(id='startday',name='startday', class='form-control', aria-describedby='dayAddon')
+							.row
+								.col-12
+									.input-group.input-group-lg
+										span(class='input-group-addon',id='monthAddon') Start Month
+										select(id='startmonth',name='startmonth', class='form-control', aria-describedby='monthAddon')
+							.row
+								.col-12
+									.input-group.input-group-lg
+										span(class='input-group-addon',id='monthAddon') Start Year
+										select(id='startyear',name='startyear', class='form-control', aria-describedby='yearAddon')
+							.row
+								.col-12
+									.input-group.input-group-lg
+										span(class='input-group-addon',id='dayAddon') End Day
+										select(id='endday',name='endday', class='form-control', aria-describedby='dayAddon')
+							.row
+								.col-12
+									.input-group.input-group-lg
+										span(class='input-group-addon',id='monthAddon') End Month
+										select(id='endmonth',name='endmonth', class='form-control', aria-describedby='monthAddon')
+							.row
+								.col-12
+									.input-group.input-group-lg
+										span(class='input-group-addon',id='monthAddon') End Year
+										select(id='endyear',name='endyear', class='form-control', aria-describedby='yearAddon')
+							.row
+								.col-12
+									.input-group.input-group-lg
+										span(class='input-group-addon',id='identityNumberAddon') Name
+										input(id='name',name='name', class='form-control', aria-describedby='identityNumberAddon')
+							.row
+								.col-12
+									.input-group.input-group-lg
+										span(class='input-group-addon',id='mobileAddon') Hourly Rate
+										input(id='hourlyRate',name='hourlyRate', class='form-control', aria-describedby='mobileAddon')
+							.row
+								.col-12
+									.input-group.input-group-lg
+										span(class='input-group-addon',id='emailAddon') Hours
+										input(id='hours', name='hours', class='form-control', aria-describedby='emailAddon')
+							.row
+								.col-12
+									button(type='submit', class='submitButton btn btn-default btn-lg btn-block') Enter
+						.panel-footer
+block pagescripts
+	script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js')
+	script(src='/javascripts/addContractFunctions.js')
