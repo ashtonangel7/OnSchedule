@@ -1,6 +1,10 @@
 .menubutton {
     font-size:4em !important;
     height:160px !important;
+    background-color: #fafafa !important;
+    background-image:none !important;
+    color: #555 !important;
+    border-color:#ccc !important;
 }
 
 .menupanel {
