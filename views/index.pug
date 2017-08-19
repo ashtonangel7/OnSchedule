@@ -8,12 +8,10 @@ block content
 					div(class='menupanel panel-heading', align='center')
 						h1(class='panel-title') #{title}
 					div(class='panel-body')
-							button(type='button', class='menubutton btn btn-default btn-lg btn-block', onClick='recordLesson()') Record Lesson
-							button(type='button', class='menubutton btn btn-default btn-lg btn-block') Student Record
-							button(type='button', class='menubutton btn btn-default btn-lg btn-block') Contract Setup
-							button(type='button', class='menubutton btn btn-default btn-lg btn-block', onClick='addStudent()') Add Student
-							button(type='button', class='menubutton btn btn-default btn-lg btn-block', onClick='addInstructor()') Add Instructor
+							button(type='button', class='menubutton btn btn-default btn-lg btn-block', onClick='openLessons()') Lessons
+							button(type='button', class='menubutton btn btn-default btn-lg btn-block', onClick='openContracts()') Contracts
+							button(type='button', class='menubutton btn btn-default btn-lg btn-block', onClick='openStudents()') Students
+							button(type='button', class='menubutton btn btn-default btn-lg btn-block', onClick='openInstructors()') Instructors
 					.panel-footer
 block pagescripts
-	script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js')
 	script(src='/javascripts/indexFunctions.js')

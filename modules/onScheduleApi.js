@@ -82,3 +82,27 @@ module.exports.WriteStudent = function WriteStudent(firstName, lastName, identit
         });
     });
 }
+
+module.exports.WriteStaff = function WriteStaff(firstName, mobile, email) {
+    return new Promise((resolve, reject) => {
+
+        let connectionPool = undefined;
+
+        mssql.connect(sqlConfig).then(pool => {
+            connectionPool = pool;
+            return connectionPool.request()
+                .input('FirstName', mssql.Text, firstName)
+                .input('Mobile', mssql.Text, mobile)
+                .input('Email', mssql.Text, email)
+                .execute('dbo.WriteStaff');
+        }).then((staffResult) => {
+            resolve(staffResult);
+            connectionPool.close();
+            mssql.close();
+        }).catch(err => {
+            connectionPool.close();
+            mssql.close();
+            reject(err);
+        });
+    });
+}

@@ -1,11 +1,15 @@
-function recordLesson() {
+function openLessons() {
     window.location = '/lesson';
 }
 
-function addStudent() {
-    window.location = '/student';
+function openStudents() {
+    window.location = '/students';
 }
 
-function addInstructor() {
-    window.location = '/instructor';
+function openInstructors() {
+    window.location = '/instructors';
+}
+
+function openContracts() {
+    window.location = '/contract';
 }

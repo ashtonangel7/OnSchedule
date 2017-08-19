@@ -30,8 +30,8 @@ expressApplication.use('/', index);
 expressApplication.use('/users', users);
 expressApplication.use("/api", api);
 expressApplication.use("/lesson", lesson);
-expressApplication.use("/student", student);
-expressApplication.use("/instructor", instructor);
+expressApplication.use("/students", student);
+expressApplication.use("/instructors", instructor);
 
 // catch 404 and forward to error handler
 expressApplication.use(function (req, res, next) {

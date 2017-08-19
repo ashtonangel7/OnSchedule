@@ -4,10 +4,18 @@ let router = express.Router();
 let onScheduleApi = require('../modules/onScheduleApi.js');
 
 router.get('/', function (req, res, next) {
-    res.render("student");
+    res.render("students/student");
 });
 
-router.post('/', function (req, res) {
+router.get('/students', function (req, res, next) {
+    res.render("students/student");
+});
+
+router.get('/addstudent', function (req, res, next) {
+    res.render("students/addstudent");
+});
+
+router.post('/addstudent', function (req, res) {
 
     let requestBody = req.body;
 
@@ -22,7 +30,7 @@ router.post('/', function (req, res) {
             status: false,
             message: "First Name is a required field."
         };
-        res.render("student", result);
+        res.render("students/student", result);
         return;
     }
 
@@ -31,7 +39,7 @@ router.post('/', function (req, res) {
             status: false,
             message: "Last Name is a required field."
         };
-        res.render("student", result);
+        res.render("students/student", result);
         return;
     }
 
@@ -40,7 +48,7 @@ router.post('/', function (req, res) {
             status: false,
             message: "Last Name is a required field."
         };
-        res.render("student", result);
+        res.render("students/student", result);
         return;
     }
 
