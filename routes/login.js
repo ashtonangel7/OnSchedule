@@ -8,15 +8,26 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    res.cookie('session', {
-        user: 'fdd',
-        instructor: 'a',
-        student: 'b',
-        tenant: 'd'
-    }, {
-    });
 
-    res.send(req.cookies);
+    let userName = req.body.userName;
+    let password = req.body.password;
+
+    onScheduleApi.AuthenticateUser(userName, password).then(result => {
+        console.log(result);
+
+        if (result.length > 0) {
+            req.session.userId = result[0].id;
+            req.session.tenantId = result[0].tenant_id;
+            req.session.isAuthenticated = true;
+            res.redirect('../');
+            return;
+        }
+
+        res.render('login');
+
+    }).catch(err => {
+        console.log(err);
+    });
 });
 
 module.exports = router;

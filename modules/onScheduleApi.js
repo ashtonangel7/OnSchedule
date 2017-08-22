@@ -2,8 +2,8 @@ let mssql = require('mssql');
 let connectionPool = undefined;
 
 let sqlConfig = {
-    user: "OnScheduleLogin",
-    password: "T6Rf45MK5wxT2CX",
+    user: "EntryPointLogin",
+    password: "juqG9GmysSxjkAn",
     server: "powersoft.database.windows.net",
     database: "OnSchedule",
 
@@ -96,11 +96,11 @@ module.exports.WriteStudent = function WriteStudent(firstName, lastName, identit
 
         if (connectionPool) {
             connectionPool.request()
-                .input('FirstName', mssql.Text, firstName)
-                .input('LastName', mssql.Text, lastName)
-                .input('IdentityNumber', mssql.Text, identityNumber)
-                .input('Mobile', mssql.Text, mobile)
-                .input('Email', mssql.Text, email)
+                .input('FirstName', mssql.VarChar, firstName)
+                .input('LastName', mssql.VarChar, lastName)
+                .input('IdentityNumber', mssql.VarChar, identityNumber)
+                .input('Mobile', mssql.VarChar, mobile)
+                .input('Email', mssql.VarChar, email)
                 .execute('dbo.WriteCustomer').then((studentResult) => {
                     resolve(studentResult);
                 }).catch(err => {
@@ -112,11 +112,11 @@ module.exports.WriteStudent = function WriteStudent(firstName, lastName, identit
         mssql.connect(sqlConfig).then(pool => {
             connectionPool = pool;
             return connectionPool.request()
-                .input('FirstName', mssql.Text, firstName)
-                .input('LastName', mssql.Text, lastName)
-                .input('IdentityNumber', mssql.Text, identityNumber)
-                .input('Mobile', mssql.Text, mobile)
-                .input('Email', mssql.Text, email)
+                .input('FirstName', mssql.VarChar, firstName)
+                .input('LastName', mssql.VarChar, lastName)
+                .input('IdentityNumber', mssql.VarChar, identityNumber)
+                .input('Mobile', mssql.VarChar, mobile)
+                .input('Email', mssql.VarChar, email)
                 .execute('dbo.WriteCustomer');
         }).then((studentResult) => {
             resolve(studentResult);
@@ -131,9 +131,9 @@ module.exports.WriteStaff = function WriteStaff(firstName, mobile, email) {
 
         if (connectionPool) {
             connectionPool.request()
-                .input('FirstName', mssql.Text, firstName)
-                .input('Mobile', mssql.Text, mobile)
-                .input('Email', mssql.Text, email)
+                .input('FirstName', mssql.VarChar, firstName)
+                .input('Mobile', mssql.VarChar, mobile)
+                .input('Email', mssql.VarChar, email)
                 .execute('dbo.WriteStaff').then((staffResult) => {
                     resolve(staffResult);
                 }).catch(err => {
@@ -146,9 +146,9 @@ module.exports.WriteStaff = function WriteStaff(firstName, mobile, email) {
         mssql.connect(sqlConfig).then(pool => {
             connectionPool = pool;
             return connectionPool.request()
-                .input('FirstName', mssql.Text, firstName)
-                .input('Mobile', mssql.Text, mobile)
-                .input('Email', mssql.Text, email)
+                .input('FirstName', mssql.VarChar, firstName)
+                .input('Mobile', mssql.VarChar, mobile)
+                .input('Email', mssql.VarChar, email)
                 .execute('dbo.WriteStaff');
         }).then((staffResult) => {
             resolve(staffResult);
@@ -167,7 +167,7 @@ module.exports.WriteContract = function WriteContract(customer, startDate,
                 .input('Customer', mssql.UniqueIdentifier, customer)
                 .input('StartDate', mssql.DateTime2, startDate)
                 .input('EndDate', mssql.DateTime2, endDate)
-                .input('Name', mssql.Text, name)
+                .input('Name', mssql.VarChar, name)
                 .input('HourlyRate', mssql.Decimal, hourlyRate)
                 .input('Hours', mssql.Int, hours)
                 .execute('dbo.WriteContract').then((contractResult) => {
@@ -185,7 +185,7 @@ module.exports.WriteContract = function WriteContract(customer, startDate,
                 .input('Customer', mssql.UniqueIdentifier, customer)
                 .input('StartDate', mssql.DateTime2, startDate)
                 .input('EndDate', mssql.DateTime2, endDate)
-                .input('Name', mssql.Text, name)
+                .input('Name', mssql.VarChar, name)
                 .input('HourlyRate', mssql.Decimal, hourlyRate)
                 .input('Hours', mssql.Int, hours)
                 .execute('dbo.WriteContract');
@@ -228,6 +228,36 @@ module.exports.WriteTimeBasedEvent = function WriteTimeBasedEvent(customer, cont
                 .execute('dbo.WriteTimeBasedEvent');
         }).then((result) => {
             resolve(result);
+        }).catch(err => {
+            reject(err);
+        });
+    });
+}
+
+module.exports.AuthenticateUser = function AuthenticateUser(userName, password) {
+    return new Promise((resolve, reject) => {
+
+        if (connectionPool) {
+            connectionPool.request()
+                .input('Username', mssql.VarChar, userName)
+                .input('Password', mssql.VarChar, password)
+                .execute('dbo.AuthenticateUser').then((result) => {
+                    resolve(result.recordset);
+            }).catch(err => {
+                reject(err);
+            });
+
+            return;
+        }
+
+        mssql.connect(sqlConfig).then(pool => {
+            connectionPool = pool;
+            return connectionPool.request()
+                .input('Username', mssql.VarChar, userName)
+                .input('Password', mssql.VarChar, password)
+                .execute('dbo.AuthenticateUser');
+        }).then((result) => {
+            resolve(result.recordset);
         }).catch(err => {
             reject(err);
         });
