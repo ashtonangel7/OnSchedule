@@ -1,7 +1,9 @@
 let express = require('express');
 let router = express.Router();
 
-let onScheduleApi = require('../modules/onScheduleApi.js');
+let onScheduleApiModule = require('../modules/onScheduleApi.js');
+
+let onScheduleApi = new onScheduleApiModule.OnScheduleApi("EntryPointLogin", "juqG9GmysSxjkAn", "OnSchedule", "powersoft.database.windows.net", true);
 
 router.get('/', function (req, res, next) {
     res.render('login');
