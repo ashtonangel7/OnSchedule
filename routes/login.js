@@ -1,4 +1,6 @@
 let express = require('express');
+let jovi = require('jovi');
+
 let router = express.Router();
 
 let onScheduleApiModule = require('../modules/onScheduleApi.js');
@@ -14,12 +16,42 @@ router.post('/', function (req, res, next) {
     let password = req.body.password;
 
     onScheduleApi.AuthenticateUser(userName, password).then(result => {
-        console.log(result);
 
         if (result.length > 0) {
+
             req.session.userId = result[0].id;
             req.session.tenantId = result[0].tenant_id;
             req.session.isAuthenticated = true;
+            req.session.databaseServer = result[0].database_server;
+            req.session.databaseCatalog = result[0].database_catalog;
+            req.session.databaseUser = result[0].database_user;
+
+            if (!result[0].crypto_hash) {
+
+                let encryptResult = jovi.encrypt(result[0].database_password, result[0].crypto_key);
+
+                req.session.databasePassword = encryptResult.hash;
+                req.session.crypto_iv = encryptResult.iv;
+                req.app.locals.encryptionKey = result[0].crypto_key;
+
+                onScheduleApi = new onScheduleApiModule.OnScheduleApi(result[0].database_user,
+                    result[0].database_password,
+                    result[0].database_catalog,
+                    result[0].database_server,
+                    true);
+                
+                onScheduleApi.UpdateUser(result[0].id, result[0].tenant_id, encryptResult.hash, encryptResult.iv).then(result => {
+                    console.log(result);
+                }).catch(err => {
+                    console.log(err);
+                });
+            }
+            else {
+                req.session.databasePassword = result[0].crypto_hash;
+                req.session.crypto_iv = result[0].crypto_iv;
+                req.app.locals.encryptionKey = result[0].crypto_key;
+            }
+
             res.redirect('../');
             return;
         }

@@ -15,13 +15,19 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
     this.databaseCatalog = databaseCatalog;
     this.encryptedConnection = encryptedConnection;
 
+    mssql.close();
+    if (connectionPool) {
+        connectionPool.close();
+        connectionPool = undefined;
+    }
+
     this.sqlConfig = {
-        user: databaseUser,//"EntryPointLogin",
-        password: databasePassword,//"juqG9GmysSxjkAn",
-        server: databaseServer,//"powersoft.database.windows.net",
-        database: databaseCatalog,//"OnSchedule",
+        user: databaseUser,
+        password: databasePassword,
+        server: databaseServer,
+        database: databaseCatalog,
         options: {
-            encrypt: encryptedConnection //true
+            encrypt: encryptedConnection 
         }
     }
 
@@ -38,7 +44,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                 return;
             }
 
-            mssql.connect(sqlConfig).then(pool => {
+            mssql.connect(this.sqlConfig).then(pool => {
                 connectionPool = pool;
                 return connectionPool.request().execute('dbo.GetCustomers');
             }).then((customerResult) => {
@@ -62,7 +68,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                 return;
             }
 
-            mssql.connect(sqlConfig).then(pool => {
+            mssql.connect(this.sqlConfig).then(pool => {
                 connectionPool = pool;
                 return connectionPool.request().execute('dbo.GetStaff');
             }).then((staffResult) => {
@@ -86,7 +92,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                 return;
             }
 
-            mssql.connect(sqlConfig).then(pool => {
+            mssql.connect(this.sqlConfig).then(pool => {
                 connectionPool = pool;
                 return connectionPool.request().execute('dbo.GetContracts');
             }).then((contractsResult) => {
@@ -115,7 +121,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                 return;
             }
 
-            mssql.connect(sqlConfig).then(pool => {
+            mssql.connect(this.sqlConfig).then(pool => {
                 connectionPool = pool;
                 return connectionPool.request()
                     .input('FirstName', mssql.VarChar, firstName)
@@ -149,7 +155,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                 return;
             }
 
-            mssql.connect(sqlConfig).then(pool => {
+            mssql.connect(this.sqlConfig).then(pool => {
                 connectionPool = pool;
                 return connectionPool.request()
                     .input('FirstName', mssql.VarChar, firstName)
@@ -185,7 +191,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                 return;
             }
 
-            mssql.connect(sqlConfig).then(pool => {
+            mssql.connect(this.sqlConfig).then(pool => {
                 connectionPool = pool;
                 return connectionPool.request()
                     .input('Customer', mssql.UniqueIdentifier, customer)
@@ -223,7 +229,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                 return;
             }
 
-            mssql.connect(sqlConfig).then(pool => {
+            mssql.connect(this.sqlConfig).then(pool => {
                 connectionPool = pool;
                 return connectionPool.request()
                     .input('Customer', mssql.UniqueIdentifier, customer)
@@ -261,6 +267,39 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                     .input('Username', mssql.VarChar, userName)
                     .input('Password', mssql.VarChar, password)
                     .execute('dbo.AuthenticateUser');
+            }).then((result) => {
+                resolve(result.recordset);
+            }).catch(err => {
+                reject(err);
+            });
+        });
+    }
+    this.UpdateUser = function UpdateUser(userId, tenantId, crypto_hash, crypto_iv) {
+        return new Promise((resolve, reject) => {
+
+            if (connectionPool) {
+                connectionPool.request()
+                    .input('UserId', mssql.UniqueIdentifier, userId)
+                    .input('TenantId', mssql.UniqueIdentifier, tenantId)
+                    .input('Crypto_Hash', mssql.VarBinary, crypto_hash)
+                    .input('Crypto_Iv', mssql.VarBinary, crypto_iv)
+                    .execute('dbo.UpdateUser').then((result) => {
+                        resolve(result.recordset);
+                    }).catch(err => {
+                        reject(err);
+                    });
+
+                return;
+            }
+
+            mssql.connect(this.sqlConfig).then(pool => {
+                connectionPool = pool;
+                return connectionPool.request()
+                    .input('UserId', mssql.UniqueIdentifier, userId)
+                    .input('TenantId', mssql.UniqueIdentifier, tenantId)
+                    .input('Crypto_Hash', mssql.VarBinary, crypto_hash)
+                    .input('Crypto_Iv', mssql.VarBinary, crypto_iv)
+                    .execute('dbo.UpdateUser');
             }).then((result) => {
                 resolve(result.recordset);
             }).catch(err => {
