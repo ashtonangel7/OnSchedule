@@ -77,7 +77,7 @@ router.post('/addstudent', function (req, res) {
 
     onScheduleApi.WriteStudent(firstName, lastName, identityNumber, mobile, email).then(result => {
         if (result.returnValue == 0) {
-            res.send(req.body);
+            res.render("students/successstudent");
         }
     }).catch(err => {
         console.log(err);

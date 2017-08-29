@@ -56,8 +56,9 @@ router.post('/addinstructor', function (req, res) {
     }
 
     onScheduleApi.WriteStaff(firstName, mobile, email).then(result => {
-        console.log(result);
-        res.render("instructors/addinstructor", result);
+        if (result.returnValue == 0) {
+            res.render("instructors/successinstructor");
+        }
     }).catch(err => {
         res.send(err);
     });
