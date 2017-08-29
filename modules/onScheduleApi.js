@@ -261,6 +261,8 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                 return;
             }
 
+            mssql.close();
+
             mssql.connect(this.sqlConfig).then(pool => {
                 connectionPool = pool;
                 return connectionPool.request()

@@ -1,9 +1,31 @@
 let express = require('express');
+let jovi = require('jovi');
+let moment = require('moment');
+let onScheduleApiModule = require('../modules/onScheduleApi.js');
+
 let router = express.Router();
 
-let onScheduleApi = require('../modules/onScheduleApi.js');
+let onScheduleApi = undefined;
 
-let moment = require('moment');
+router.use(function setAuthentication(req, res, next) {
+
+    if (!onScheduleApi) {
+
+        let databasePassword = jovi.decrypt(Buffer.from(req.session.databasePassword),
+            req.app.locals.encryptionKey,
+            Buffer.from(req.session.crypto_iv)).toString();
+
+        onScheduleApi = new onScheduleApiModule.OnScheduleApi(
+            req.session.databaseUser,
+            databasePassword,
+            req.session.databaseCatalog,
+            req.session.databaseServer,
+            true
+            );
+    }
+
+    next();
+});
 
 router.get('/', function (req, res, next) {
     res.render('contracts/contract');
@@ -57,16 +79,49 @@ router.post('/addcontract', function (req, res, next) {
     }
 
     let startDate = moment().year(startYear).month(startMonth).utc().format('YYYY-MM-DDTHH:mm:ss');
-    let endDate = moment().year(endYear).month(endMonth).date(endDay).utc().format('YYYY-MM-DDTHH:mm:ss')
+    let endDate = moment().year(endYear).month(endMonth).date(endDay).utc().format('YYYY-MM-DDTHH:mm:ss');
 
-    console.log(startDate);
-    console.log(endDate);
+    let contractData = {
+        student: student,
+        startDate: startDate,
+        endDate: endDate,
+        name: name,
+        hourlyRate: hourlyRate,
+        hours: hours,
+        studentName: undefined
+    };
 
-    onScheduleApi.WriteContract(student, startDate, endDate, name, hourlyRate, hours).then(result => {
-        res.send(result);
+    onScheduleApi.GetCustomers().then(customerResult => {
+
+        for (let customer of customerResult) {
+
+            if (customer.id == student) {
+                contractData.studentName = customer.first_name;
+                break;
+            }
+        }
+
+        res.render('contracts/confirmcontract', contractData);
     }).catch(err => {
         console.log(err);
     });
+
+
+
+});
+
+router.post('/confirmcontract', function (req, res, next) {
+
+    let request = req.body;
+
+    onScheduleApi.WriteContract(request.student, request.startDate, request.endDate, request.name, request.hourlyRate, request.hours).then(result => {
+        if (result.returnValue == 0) {
+            res.render('contracts/successcontract');
+        }
+    }).catch(err => {
+        console.log(err);
+    });
+
 });
 
 module.exports = router;

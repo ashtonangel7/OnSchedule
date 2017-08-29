@@ -1,11 +1,10 @@
 let express = require('express');
-let router = express.Router();
 let jovi = require('jovi');
-
-let expressApplication = express();
-
-let onScheduleApiModule = require('../modules/onScheduleApi.js');
 let moment = require('moment');
+let onScheduleApiModule = require('../modules/onScheduleApi.js');
+
+let router = express.Router();
+let expressApplication = express();
 
 let onScheduleApi = undefined;
 
@@ -27,7 +26,7 @@ router.use(function setAuthentication(req, res, next) {
     }
 
     next();
-})
+});
 
 router.get('/', function (req, res, next) {
     res.render('lessons/lesson');
