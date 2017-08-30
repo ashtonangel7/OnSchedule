@@ -1,0 +1,39 @@
+extends ../layout
+
+block pagestyles
+	link(rel='stylesheet', href='//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css')
+block content
+	.container-fluid
+		form(class='entryForm', method='Post')
+			.row
+				.col-md-12.col-sm-12.col-xs-12.col-lg-12
+					.panel.panel-info
+						div(class='menupanel panel-heading')
+							span(class='backspan')
+								a(href='../')
+									span(class='glyphicon glyphicon-chevron-left', aria-hidden='true')
+							div(align='center')
+								h1(class='panel-title') Student Record
+						div(class='panel-body')
+							.row
+								.col-12
+									table(id='dataTable',class='display',width='100%',cellspacing='0')
+										thead
+											tr
+												th Student
+												th Contract
+												th Minutes Remaining
+												th Lessons Cost
+												th Lessons Completed
+										tbody
+											each student in customers
+												tr
+													td #{student.first_name}
+													td #{student.name}
+													td #{student.minutesleft}
+													td #{student.lessonscost}
+													td #{student.lessoncount}
+						.panel-footer
+block pagescripts
+	script(src='//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js')
+	script(src='/javascripts/studentRecordViewFunctions.js')

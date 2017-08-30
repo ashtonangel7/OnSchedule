@@ -38,6 +38,36 @@ router.get('/addstudent', function (req, res, next) {
     res.render("students/addstudent");
 });
 
+router.get('/studentrecord', function (req, res, next) {
+
+    let result = {
+        customers: undefined
+    };
+
+    onScheduleApi.GetCustomers().then(function (customerResult) {
+        result.customers = customerResult;
+        res.render("students/studentrecord", result);
+    }).catch(err => {
+        console.log(err);
+    });
+});
+
+router.post('/studentrecord', function (req, res) {
+    let request = req.body;
+    let student = request.student;
+
+    onScheduleApi.GetCustomerContractRecord(student).then(function (result) {
+        console.log(result);
+
+        let customers = {
+            customers: result
+        }
+        res.render("students/studentrecordview", customers);
+    }).catch(err => {
+        console.log(err);
+    });
+});
+
 router.post('/addstudent', function (req, res) {
 
     let requestBody = req.body;

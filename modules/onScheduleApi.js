@@ -309,6 +309,33 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
             });
         });
     }
+    this.GetCustomerContractRecord = function GetCustomerContractRecord(customer) {
+        return new Promise((resolve, reject) => {
+
+            if (connectionPool) {
+                connectionPool.request()
+                    .input('Customer', mssql.UniqueIdentifier, customer)
+                    .execute('dbo.GetCustomerContractRecord').then((result) => {
+                        resolve(result.recordset);
+                    }).catch(err => {
+                        reject(err);
+                    });
+
+                return;
+            }
+
+            mssql.connect(this.sqlConfig).then(pool => {
+                connectionPool = pool;
+                return connectionPool.request()
+                    .input('Customer', mssql.UniqueIdentifier, customer)
+                    .execute('dbo.GetCustomerContractRecord');
+            }).then((result) => {
+                resolve(result.recordset);
+            }).catch(err => {
+                reject(err);
+            });
+        });
+    }
 }
 
 
