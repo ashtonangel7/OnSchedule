@@ -5,3 +5,7 @@ $(document).ready(function () {
         responsive: true
     });
 });
+
+function viewLessons(object) {
+    console.log(object);
+}

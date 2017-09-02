@@ -61,6 +61,7 @@ router.post('/studentrecord', function (req, res) {
         let customers = {
             customers: result
         }
+        console.log(customers);
         res.render("students/studentrecordview", customers);
     }).catch(err => {
         console.log(err);

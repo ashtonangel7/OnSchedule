@@ -11,7 +11,7 @@ block content
 					.panel.panel-info
 						div(class='menupanel panel-heading')
 							span(class='backspan')
-								a(href='../')
+								a(href='./')
 									span(class='glyphicon glyphicon-chevron-left', aria-hidden='true')
 							div(align='center')
 								h1(class='panel-title') Student Record
@@ -26,6 +26,7 @@ block content
 												th Minutes
 												th Cost
 												th Lessons
+												th
 										tbody
 											each student in customers
 												tr
@@ -34,6 +35,8 @@ block content
 													td #{student.minutesleft}
 													td #{student.lessonscost}
 													td #{student.lessoncount}
+													td
+														button(type='button', data-id=student.customer , data-tenant=student.tenant_id, onclick='viewLessons(this)') View Lessons
 						.panel-footer
 block pagescripts
 	script(src='//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js')
