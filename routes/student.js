@@ -57,7 +57,6 @@ router.post('/studentrecord', function (req, res) {
     let student = request.student;
 
     onScheduleApi.GetCustomerContractRecord(student).then(function (result) {
-        console.log(result);
 
         let customers = {
             customers: result

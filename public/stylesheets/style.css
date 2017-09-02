@@ -1,75 +1,97 @@
 .menubutton {
-    font-size:4em !important;
-    height:160px !important;
+    font-size: 4em !important;
+    height: 160px !important;
     background-color: #fafafa !important;
-    background-image:none !important;
+    background-image: none !important;
     color: #555 !important;
-    border-color:#ccc !important;
+    border-color: #ccc !important;
 }
 
 .menupanel {
-
 }
 
 .panel-title {
-    font-size:6em !important;
+    font-size: 6em !important;
 }
 
 body {
-    padding-top:20px;
+    padding-top: 20px;
     /*background-image: url("../images/dance.jpg");
     background-repeat: repeat-x;
     background-position:bottom;*/
 }
 
 .container {
-    padding-left:5px !important;
-    padding-right:5px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
 }
 
 .row {
     padding-top: 5px !important;
-    padding-bottom:5px !important;
-    padding-left:5px !important;
-    padding-right:5px !important;
+    padding-bottom: 5px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
 }
 
 .formlabel {
-    
 }
 
 .submitButton {
-    font-size:4em !important;
-    height:160px !important;
+    font-size: 4em !important;
+    height: 160px !important;
 }
 
 .input-group > span {
-    min-width:400px;
-    font-size:4em !important;
+    min-width: 400px;
+    font-size: 4em !important;
 }
 
 .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8,
- .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7,
- .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6,
- .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5,
- .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
-    padding-right:0px !important;
-    padding-left:0px !important;
+.col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7,
+.col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6,
+.col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5,
+.col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
 }
 
 .entryForm select, input {
-    height:180px !important;
-    font-size:50px !important;
+    height: 180px !important;
+    font-size: 50px !important;
 }
 
 .backspan {
     float: left;
 }
 
-.backspan .glyphicon  {
-    font-size: 100px !important;
-}
+    .backspan .glyphicon {
+        font-size: 100px !important;
+    }
 
 .thumbsup {
     font-size: 150px !important;
+}
+
+table {
+    font-size: 50px !important;
+}
+
+th {
+    font-weight: bold !important;
+}
+
+tbody {
+    font-weight: lighter !important;
+}
+
+span.dtr-title {
+    font-weight: bold !important;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child::before {
+    font-size: 10px !important;
+}
+
+.dataTables_info {
+    font-size: 30px !important;
 }
