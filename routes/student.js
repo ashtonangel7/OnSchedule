@@ -61,7 +61,7 @@ router.post('/studentrecord', function (req, res) {
         let customers = {
             customers: result
         }
-        console.log(customers);
+
         res.render("students/studentrecordview", customers);
     }).catch(err => {
         console.log(err);
@@ -113,6 +113,25 @@ router.post('/addstudent', function (req, res) {
         console.log(err);
         res.send(err);
     });   
+});
+
+router.post("/studentrecordviewlessons", function (req, res, next) {
+    let request = req.body;
+
+    let customer = request.customer;
+    let tenant_id = request.tenant_id;
+    let contract = request.contract;
+
+    onScheduleApi.GetCustomerRecord(contract).then(result => {
+
+        let lessons = {
+            lessons: result
+        };
+
+        res.render('students/studentviewlessons', lessons);
+    }).catch(err => {
+        console.log(err);
+    });
 });
 
 module.exports = router;
