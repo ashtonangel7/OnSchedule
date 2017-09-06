@@ -1,5 +1,7 @@
 let express = require('express');
 let jovi = require('jovi');
+let moment = require('moment');
+let momentTimezone = require('moment-timezone');
 let onScheduleApiModule = require('../modules/onScheduleApi.js');
 
 let router = express.Router();
@@ -123,6 +125,8 @@ router.post("/studentrecordviewlessons", function (req, res, next) {
     let contract = request.contract;
 
     onScheduleApi.GetCustomerRecord(contract).then(result => {
+
+        console.log(result);
 
         let lessons = {
             lessons: result
