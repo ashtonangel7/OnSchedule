@@ -1,24 +1,12 @@
 .menubutton {
-    font-size: 4em !important;
-    height: 160px !important;
     background-color: #fafafa !important;
     background-image: none !important;
     color: #555 !important;
     border-color: #ccc !important;
 }
 
-.menupanel {
-}
-
-.panel-title {
-    font-size: 6em !important;
-}
-
 body {
     padding-top: 20px;
-    /*background-image: url("../images/dance.jpg");
-    background-repeat: repeat-x;
-    background-position:bottom;*/
 }
 
 .container {
@@ -33,17 +21,8 @@ body {
     padding-right: 5px !important;
 }
 
-.formlabel {
-}
-
-.submitButton {
-    font-size: 4em !important;
-    height: 160px !important;
-}
-
 .input-group > span {
-    min-width: 400px;
-    font-size: 4em !important;
+    min-width: 150px;
 }
 
 .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8,
@@ -55,25 +34,16 @@ body {
     padding-left: 0px !important;
 }
 
-.entryForm select, input {
-    height: 180px !important;
-    font-size: 50px !important;
-}
-
 .backspan {
     float: left;
 }
 
-    .backspan .glyphicon {
-        font-size: 100px !important;
-    }
+.backspan .glyphicon {
+    font-size: 1.5em !important;
+}
 
 .thumbsup {
     font-size: 150px !important;
-}
-
-table {
-    font-size: 50px !important;
 }
 
 th {
@@ -92,6 +62,3 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, tabl
     font-size: 10px !important;
 }
 
-.dataTables_info {
-    font-size: 30px !important;
-}
