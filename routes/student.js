@@ -126,11 +126,23 @@ router.post("/studentrecordviewlessons", function (req, res, next) {
 
     onScheduleApi.GetCustomerRecord(contract).then(result => {
 
-        console.log(result);
-
         let lessons = {
-            lessons: result
+            lessons: []
         };
+
+        for (lesson of result) {
+            lessons.lessons.push({
+                start_date: lesson.start_date,
+                minutes: lesson.minutes,
+                contract_name: lesson.contract_name,
+                customer_name: lesson.customer_name,
+                staff_name: lesson.staff_name,
+                event_id: lesson.event_id,
+                attendee_count: lesson.attendee_count
+            });
+        }
+
+        console.log(lessons);
 
         res.render('students/studentviewlessons', lessons);
     }).catch(err => {

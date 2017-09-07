@@ -35,7 +35,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
         return new Promise((resolve, reject) => {
 
             if (connectionPool) {
-                connectionPool.request().execute('dbo.GetCustomers').then((customerResult) => {
+                connectionPool.request().execute('core.GetCustomers').then((customerResult) => {
                     resolve(customerResult.recordset);
                 }).catch(err => {
                     reject(err);
@@ -46,7 +46,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
 
             mssql.connect(this.sqlConfig).then(pool => {
                 connectionPool = pool;
-                return connectionPool.request().execute('dbo.GetCustomers');
+                return connectionPool.request().execute('core.GetCustomers');
             }).then((customerResult) => {
                 resolve(customerResult.recordset);
             }).catch(err => {
@@ -59,7 +59,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
         return new Promise((resolve, reject) => {
 
             if (connectionPool) {
-                connectionPool.request().execute('dbo.GetStaff').then((staffResult) => {
+                connectionPool.request().execute('core.GetStaff').then((staffResult) => {
                     resolve(staffResult.recordset);
                 }).catch(err => {
                     reject(err);
@@ -70,7 +70,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
 
             mssql.connect(this.sqlConfig).then(pool => {
                 connectionPool = pool;
-                return connectionPool.request().execute('dbo.GetStaff');
+                return connectionPool.request().execute('core.GetStaff');
             }).then((staffResult) => {
                 resolve(staffResult.recordset);
             }).catch(err => {
@@ -83,7 +83,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
         return new Promise((resolve, reject) => {
 
             if (connectionPool) {
-                connectionPool.request().execute('dbo.GetContracts').then((contractsResult) => {
+                connectionPool.request().execute('core.GetContracts').then((contractsResult) => {
                     resolve(contractsResult.recordset);
                 }).catch(err => {
                     reject(err);
@@ -94,7 +94,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
 
             mssql.connect(this.sqlConfig).then(pool => {
                 connectionPool = pool;
-                return connectionPool.request().execute('dbo.GetContracts');
+                return connectionPool.request().execute('core.GetContracts');
             }).then((contractsResult) => {
                 resolve(contractsResult.recordset);
             }).catch(err => {
@@ -113,7 +113,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                     .input('IdentityNumber', mssql.VarChar, identityNumber)
                     .input('Mobile', mssql.VarChar, mobile)
                     .input('Email', mssql.VarChar, email)
-                    .execute('dbo.WriteCustomer').then((studentResult) => {
+                    .execute('core.WriteCustomer').then((studentResult) => {
                         resolve(studentResult);
                     }).catch(err => {
                         reject(err);
@@ -129,7 +129,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                     .input('IdentityNumber', mssql.VarChar, identityNumber)
                     .input('Mobile', mssql.VarChar, mobile)
                     .input('Email', mssql.VarChar, email)
-                    .execute('dbo.WriteCustomer');
+                    .execute('core.WriteCustomer');
             }).then((studentResult) => {
                 resolve(studentResult);
             }).catch(err => {
@@ -146,7 +146,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                     .input('FirstName', mssql.VarChar, firstName)
                     .input('Mobile', mssql.VarChar, mobile)
                     .input('Email', mssql.VarChar, email)
-                    .execute('dbo.WriteStaff').then((staffResult) => {
+                    .execute('core.WriteStaff').then((staffResult) => {
                         resolve(staffResult);
                     }).catch(err => {
                         reject(err);
@@ -161,7 +161,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                     .input('FirstName', mssql.VarChar, firstName)
                     .input('Mobile', mssql.VarChar, mobile)
                     .input('Email', mssql.VarChar, email)
-                    .execute('dbo.WriteStaff');
+                    .execute('core.WriteStaff');
             }).then((staffResult) => {
                 resolve(staffResult);
             }).catch(err => {
@@ -182,7 +182,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                     .input('Name', mssql.VarChar, name)
                     .input('HourlyRate', mssql.Decimal, hourlyRate)
                     .input('Hours', mssql.Int, hours)
-                    .execute('dbo.WriteContract').then((contractResult) => {
+                    .execute('core.WriteContract').then((contractResult) => {
                         resolve(contractResult);
                     }).catch(err => {
                         reject(err);
@@ -200,7 +200,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                     .input('Name', mssql.VarChar, name)
                     .input('HourlyRate', mssql.Decimal, hourlyRate)
                     .input('Hours', mssql.Int, hours)
-                    .execute('dbo.WriteContract');
+                    .execute('core.WriteContract');
             }).then((contractResult) => {
                 resolve(contractResult);
             }).catch(err => {
@@ -220,7 +220,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                     .input('StartDate', mssql.DateTime2, startDate)
                     .input('EndDate', mssql.DateTime2, endDate)
                     .input('Instructor', mssql.UniqueIdentifier, instructor)
-                    .execute('dbo.WriteTimeBasedEvent').then((result) => {
+                    .execute('core.WriteTimeBasedEvent').then((result) => {
                         resolve(result);
                     }).catch(err => {
                         reject(err);
@@ -237,7 +237,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                     .input('StartDate', mssql.DateTime2, startDate)
                     .input('EndDate', mssql.DateTime2, endDate)
                     .input('Instructor', mssql.UniqueIdentifier, instructor)
-                    .execute('dbo.WriteTimeBasedEvent');
+                    .execute('core.WriteTimeBasedEvent');
             }).then((result) => {
                 resolve(result);
             }).catch(err => {
@@ -252,7 +252,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                 connectionPool.request()
                     .input('Username', mssql.VarChar, userName)
                     .input('Password', mssql.VarChar, password)
-                    .execute('dbo.AuthenticateUser').then((result) => {
+                    .execute('auth.AuthenticateUser').then((result) => {
                         resolve(result.recordset);
                     }).catch(err => {
                         reject(err);
@@ -268,7 +268,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                 return connectionPool.request()
                     .input('Username', mssql.VarChar, userName)
                     .input('Password', mssql.VarChar, password)
-                    .execute('dbo.AuthenticateUser');
+                    .execute('auth.AuthenticateUser');
             }).then((result) => {
                 resolve(result.recordset);
             }).catch(err => {
@@ -285,7 +285,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                     .input('TenantId', mssql.UniqueIdentifier, tenantId)
                     .input('Crypto_Hash', mssql.VarBinary, crypto_hash)
                     .input('Crypto_Iv', mssql.VarBinary, crypto_iv)
-                    .execute('dbo.UpdateUser').then((result) => {
+                    .execute('core.UpdateUser').then((result) => {
                         resolve(result.recordset);
                     }).catch(err => {
                         reject(err);
@@ -301,7 +301,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                     .input('TenantId', mssql.UniqueIdentifier, tenantId)
                     .input('Crypto_Hash', mssql.VarBinary, crypto_hash)
                     .input('Crypto_Iv', mssql.VarBinary, crypto_iv)
-                    .execute('dbo.UpdateUser');
+                    .execute('core.UpdateUser');
             }).then((result) => {
                 resolve(result.recordset);
             }).catch(err => {
@@ -315,7 +315,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
             if (connectionPool) {
                 connectionPool.request()
                     .input('Customer', mssql.UniqueIdentifier, customer)
-                    .execute('dbo.GetCustomerContractRecord').then((result) => {
+                    .execute('core.GetCustomerContractRecord').then((result) => {
                         resolve(result.recordset);
                     }).catch(err => {
                         reject(err);
@@ -328,7 +328,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                 connectionPool = pool;
                 return connectionPool.request()
                     .input('Customer', mssql.UniqueIdentifier, customer)
-                    .execute('dbo.GetCustomerContractRecord');
+                    .execute('core.GetCustomerContractRecord');
             }).then((result) => {
                 resolve(result.recordset);
             }).catch(err => {
@@ -342,7 +342,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
             if (connectionPool) {
                 connectionPool.request()
                     .input('Contract', mssql.UniqueIdentifier, contract)
-                    .execute('dbo.GetCustomerRecord').then((result) => {
+                    .execute('core.GetCustomerRecord').then((result) => {
                         resolve(result.recordset);
                     }).catch(err => {
                         reject(err);
@@ -355,7 +355,7 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
                 connectionPool = pool;
                 return connectionPool.request()
                     .input('Contract', mssql.UniqueIdentifier, contract)
-                    .execute('dbo.GetCustomerRecord');
+                    .execute('core.GetCustomerRecord');
             }).then((result) => {
                 resolve(result.recordset);
             }).catch(err => {
