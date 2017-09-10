@@ -36,9 +36,14 @@ expressApplication.use(session({
 
 let checkAuthenticated = function (req, res, next) {
 
-    if (!req.session || (!req.session.isAuthenticated && req.url != '/login')) {
-        res.redirect('../login');
-        return;
+    if (!req.session || !req.session.isAuthenticated) {
+
+        if (req.url == '/login' || req.url == '/login/forgotPassword') {
+
+        }
+        else {
+            res.redirect('../login');
+        }
     }
 
     next();

@@ -56,11 +56,15 @@ router.post('/', function (req, res, next) {
             return;
         }
 
-        res.render('login', {message: "That is not the correct unsername or password, please try again or hit forgotten password."});
+        res.render('login', {message: "That is not the right user / email or password, please try again or hit forgotten password."});
 
     }).catch(err => {
         console.log(err);
     });
+});
+
+router.get('/forgotPassword', function (req, res, next) {
+    res.render('forgotPassword');
 });
 
 module.exports = router;
