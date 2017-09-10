@@ -13,3 +13,7 @@ function openInstructors() {
 function openContracts() {
     window.location = '/contracts';
 }
+
+function logout() {
+    window.location = '/logout';
+}
