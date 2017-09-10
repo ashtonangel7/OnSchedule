@@ -1,7 +1,7 @@
 let express = require('express');
 let jovi = require('jovi');
 let moment = require('moment');
-let momentTimezone = require('moment-timezone');
+let momentTimeZone = require('moment-timezone');
 let onScheduleApiModule = require('../modules/onScheduleApi.js');
 
 let router = express.Router();
@@ -132,7 +132,7 @@ router.post("/studentrecordviewlessons", function (req, res, next) {
 
         for (lesson of result) {
             lessons.lessons.push({
-                start_date: lesson.start_date,
+                start_date: moment(lesson.start_date).tz(lesson.timezone).format("D MMM Y, HH:mm"),
                 minutes: lesson.minutes,
                 contract_name: lesson.contract_name,
                 customer_name: lesson.customer_name,
@@ -141,8 +141,6 @@ router.post("/studentrecordviewlessons", function (req, res, next) {
                 attendee_count: lesson.attendee_count
             });
         }
-
-        console.log(lessons);
 
         res.render('students/studentviewlessons', lessons);
     }).catch(err => {
