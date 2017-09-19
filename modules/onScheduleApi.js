@@ -276,6 +276,37 @@ module.exports.OnScheduleApi = function OnScheduleApi(databaseUser, databasePass
             });
         });
     }
+    this.SetPasswordResetCode = function GetPasswordResetCode(userName, resetCode) {
+        return new Promise((resolve, reject) => {
+
+            if (connectionPool) {
+                connectionPool.request()
+                    .input('UserName', mssql.VarChar, userName)
+                    .input('ResetCode', mssql.UniqueIdentifier, resetCode)
+                    .execute('auth.SetResetCode').then((result) => {
+                        resolve(result.recordset);
+                    }).catch(err => {
+                        reject(err);
+                    });
+
+                return;
+            }
+
+            mssql.close();
+
+            mssql.connect(this.sqlConfig).then(pool => {
+                connectionPool = pool;
+                return connectionPool.request()
+                    .input('UserName', mssql.VarChar, userName)
+                    .input('ResetCode', mssql.UniqueIdentifier, resetCode)
+                    .execute('auth.SetResetCode');
+            }).then((result) => {
+                resolve(result.recordset);
+            }).catch(err => {
+                reject(err);
+            });
+        });
+    }
     this.UpdateUser = function UpdateUser(userId, tenantId, crypto_hash, crypto_iv) {
         return new Promise((resolve, reject) => {
 

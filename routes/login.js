@@ -1,5 +1,6 @@
 let express = require('express');
 let jovi = require('jovi');
+let uuidv4 = require('uuid/v4');
 
 let router = express.Router();
 
@@ -70,11 +71,18 @@ router.get('/forgotPassword', function (req, res, next) {
 router.post('/forgotPassword', function (req, res, next) {
 
     let request = req.body;
+    let userName = request.email;  
 
-    let user = request.email;
+    let resetCode = uuidv4();
 
+    onScheduleApi.SetPasswordResetCode(userName, resetCode).then(result => {
 
-    
+        console.log(result);
+        res.send(result);
+
+    }).catch(err => {
+        console.log(err);
+    });
 });
 
 module.exports = router;

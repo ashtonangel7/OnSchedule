@@ -13,6 +13,7 @@
     "morgan": "^1.8.2",
     "mssql": "^4.0.4",
     "pug": "~2.0.0-beta11",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "uuid": "^3.1.0"
   }
 }
