@@ -77,8 +77,8 @@ router.post('/forgotPassword', function (req, res, next) {
 
     onScheduleApi.SetPasswordResetCode(userName, resetCode).then(result => {
 
-        console.log(result);
-        res.send(result);
+        console.log(resetCode);
+        res.render('forgotPasswordCodeSent');
 
     }).catch(err => {
         console.log(err);
